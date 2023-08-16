@@ -22,6 +22,16 @@
         font-weight: bold;
     }
 
+    #check-button {
+        margin-top: 13px;
+    }
+
+    #reply-save-button {
+        margin: 0;
+        background-color: white;
+        border-color: white;
+    }
+
 
     .footer {
         background-color: rgb(222, 222, 222);
@@ -37,21 +47,25 @@
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/joinForm">회원가입</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/loginForm">로그인</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/board/saveForm">글쓰기</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/updateForm">회원정보보기</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">로그아웃</a>
-                    </li>
+                    {{#sessionUser}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/board/saveForm">글쓰기</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/updateForm">회원정보보기</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">로그아웃</a>
+                        </li>
+                    {{/sessionUser}}
+                    {{^sessionUser}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/joinForm">회원가입</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/loginForm">로그인</a>
+                        </li>
+                    {{/sessionUser}}
                 </ul>
             </div>
         </div>
