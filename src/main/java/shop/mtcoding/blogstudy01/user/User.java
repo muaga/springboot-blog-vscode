@@ -2,6 +2,7 @@ package shop.mtcoding.blogstudy01.user;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,8 +21,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
+
+    @Column(nullable = false, length = 20, unique = true)
     private String username;
+    
+    @Column(nullable = false, length = 60)
     private String password;
+    
+    @Column(nullable = false, length = 20)
     private String email;
+    
     private Timestamp createdAt;
 }

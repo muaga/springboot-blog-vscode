@@ -78,4 +78,16 @@ public class UserRepository {
                 "select * from user_tb", User.class);
         return query.getResultList();
     }
+
+    // findByUsername
+    public User findByUsername(String username) {
+        try {
+            Query query = em.createNativeQuery("select * from user_tb where username = :username", User.class);
+            query.setParameter("username", username);
+            return (User) query.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
 }

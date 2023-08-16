@@ -8,26 +8,43 @@
     <div class="card">
         <div class="card-header"><b>회원가입을 해주세요</b></div>
         <div class="card-body">
-            <form action="/join" method="post" enctype="application/x-www-form-urlencoded">
-                <!-- onsubmit="return valid()" : 버튼을 클릭할 때, onsubmit에 걸린 vaild()를 실행하고 다음 action을 한다. 
-                값이 false이면 return값이 false이기 때문에 action을 하지 않는다. return값이 true이면 submit이 실행된다.
-                 * 여기서 프론트유효성검사를 할 수 있다.-->
-                <!--method를 쓰지 않으면, 디폴트값이 GET이다.-->
+            <form action="/join" method="post" enctype="application/x-www-form-urlencoded" onsubmit="return valid()">
+                <!--onsubmit="return valid()" : form 태그가 제출될 때, 실행되는 JavaScript 함수-->
                 <div class="mb-3">
-                    <input type="text" id="username" class="form-control" placeholder="Enter username" name="username" value="">
-                    <button type="button" class="btn btn-warning" id="check-button">중복체크</button>
+                    <input type="text" id="username" class="form-control" placeholder="Enter username" name="username" value="" required maxlength="20"
+                    onchange="usernameChange()">
+                    <button type="button" onclick="check()" class="btn btn-warning" id="check-button">중복체크</button>
                     <!-- Form 태그 안의 button의 기본값은 submit이다. -->
                 </div>
                 <div class="mb-3">
-                    <input type="password" class="form-control" placeholder="Enter password" name="password" value="">
+                    <input type="password" class="form-control" placeholder="Enter password" name="password" value="" required maxlength="60">
                 </div>
                 <div class="mb-3">
-                    <input type="email" class="form-control" placeholder="Enter email" name="email" value="">
+                    <input type="email" class="form-control" placeholder="Enter email" name="email" value="" required maxlength="20">
                 </div>
                 <button type="submit" id="btnJoin" class="btn btn-primary form-control">회원가입</button>
-                <!--submit : form tag 안에 존재해서, form 속 내용을 한 번에 등록시켜준다.-->
             </form>
         </div>
     </div>
 </div>
+
+<!-- AJAX 통신 -->
+<script>
+
+// 중복체크를 하지 않은 상태
+let usernameSameCheck = false;
+
+// 중복체크 버튼 이벤트 유무 확인
+function valid(){
+    if(usernameSameCheck){
+        return true;
+        console.log("test1");
+    } else {
+        alert("유저네임 중복체크를 해주세요.")
+        console.log("test2");
+    }
+}
+</script>
+
+
 {{> /layout/footer}}
