@@ -44,14 +44,12 @@ public class UserRepository {
     public void update(UserUpadateDTO entity, Integer id) {
         Query query = em.createNativeQuery(
                 "update user_tb set password = :password where id = :id");
-        System.out.println("test : 1");
-
+        // System.out.println("test : 1");
         query.setParameter("password", entity.getPassword());
         query.setParameter("id", id);
-        System.out.println("test : 2");
-
+        // System.out.println("test : 2");
         query.executeUpdate();
-        System.out.println("test : 3");
+        // System.out.println("test : 3");
 
     }
 

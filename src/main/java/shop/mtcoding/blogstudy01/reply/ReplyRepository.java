@@ -19,12 +19,12 @@ public class ReplyRepository {
 
     // 등록
     @Transactional
-    public void save(Reply entity) {
+    public void save(ReplyRequest.SaveDTO saveDTO, Integer userId) {
         Query query = em.createNativeQuery(
                 "insert into reply_tb(comment, created_at, user_id, board_id) values(:comment, now(), :userId, :boardId)");
-        query.setParameter("comment", entity.getComment());
-        query.setParameter("userId", entity.getUser().getId());
-        query.setParameter("boardId", entity.getBoard().getId());
+        query.setParameter("comment", saveDTO.getComment());
+        query.setParameter("userId", userId);
+        query.setParameter("boardId", saveDTO.getBoardId());
         query.executeUpdate();
     }
 

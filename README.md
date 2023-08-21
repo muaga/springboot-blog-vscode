@@ -8,6 +8,8 @@
 3. select 쿼리 ORM 매핑 - DTO를 매핑하려면 qlrm해라
 4. 늘 그렇지만, 오타 확인 필수!
 5. 쿼리 실행 시, query.set 객체 잘 하기
+6. list로 받은 객체들은 번지수 잘 체크하기
+7. DTO를 request에 묶었으면, 꼭 static 했는 지 확인하기
 
 
 

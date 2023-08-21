@@ -50,9 +50,27 @@ public class BoardController {
 
     // 글 상세보기 페이지
     @GetMapping("/board/{id}")
-    public String detail(@PathVariable Integer id, HttpServletRequest request){
-        Board board = boardRepository.findById(id);
-        request.setAttribute("board", board);
+    public String detailForm(@PathVariable Integer id, HttpServletRequest request){
+        // 로그인 유저인지 확인
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
+        // 댓글 권한 체크 및 게시물 select
+        List<BoardDetailDTO> dtos = null;
+        if(sessionUser == null){
+            dtos = boardRepository.findByIdJoinReply(id, null);
+        } else {
+            dtos = boardRepository.findByIdJoinReply(id, sessionUser.getId());
+        }
+
+        // 게시물 권한 체크
+        boolean pageOwner = false;
+
+        if(sessionUser != null){
+            pageOwner = sessionUser.getId() == dtos.get(0).getBoardUserId();
+        }
+
+        request.setAttribute("dtos", dtos);
+        request.setAttribute("pageOwner", pageOwner);
         return "board/detailForm";
     }
     
